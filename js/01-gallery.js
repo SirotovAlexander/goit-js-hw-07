@@ -3,7 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryUl = document.querySelector(".gallery");
 galleryUl.addEventListener("click", onClick);
-galleryUl.addEventListener("keyup", onClick);
+window.addEventListener("keyup", onClick);
 
 let markup = "";
 for (let i = 0; i < galleryItems.length; i += 1) {
@@ -35,12 +35,6 @@ function onClick(event) {
   event.preventDefault();
   instance.show();
 
-  if (event.code === "Escape") {
-    instance.close();
-  }
-}
-
-function onKey(event) {
   if (event.code === "Escape") {
     instance.close();
   }
