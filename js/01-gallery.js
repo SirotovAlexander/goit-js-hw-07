@@ -3,7 +3,6 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryUl = document.querySelector(".gallery");
 galleryUl.addEventListener("click", onClick);
-window.addEventListener("keyup", onClick);
 
 let markup = "";
 for (let i = 0; i < galleryItems.length; i += 1) {
@@ -18,11 +17,14 @@ for (let i = 0; i < galleryItems.length; i += 1) {
   </a>
 </li>`;
 }
-
 galleryUl.insertAdjacentHTML("afterbegin", markup);
 
 function onClick(event) {
-  console.log(event.target.dataset.source);
+  event.preventDefault();
+
+  if (!event.target.classList.contains("gallery__image")) {
+    return;
+  }
 
   const instance = basicLightbox.create(`
 	<img
@@ -31,11 +33,15 @@ function onClick(event) {
       data-source="${event.target.dataset.source}"
     />
 `);
-
-  event.preventDefault();
   instance.show();
 
-  if (event.code === "Escape") {
-    instance.close();
+  window.addEventListener("keyup", onKetUp);
+
+  function onKetUp(event) {
+    if (event.code === "Escape") {
+      instance.close();
+      window.removeEventListener("keyup", onKetUp);
+      return;
+    }
   }
 }
