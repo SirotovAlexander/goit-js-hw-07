@@ -24,8 +24,3 @@ let dynamicGallery = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
 });
 dynamicGallery.on("show.simplelightbox", function () {});
-console.log(dynamicGallery);
-
-// {
-//   options: captionsData,
-// }
