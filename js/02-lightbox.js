@@ -15,5 +15,17 @@ for (let i = 0; i < galleryItems.length; i += 1) {
 
 galleryGrid.insertAdjacentHTML("afterbegin", markup);
 
-let gallery = new SimpleLightbox(".gallery a");
-console.log(gallery);
+let dynamicGallery = new SimpleLightbox(".gallery a", {
+  caption: true,
+  captionSelector: "img",
+  captionType: "attr",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
+dynamicGallery.on("show.simplelightbox", function () {});
+console.log(dynamicGallery);
+
+// {
+//   options: captionsData,
+// }
